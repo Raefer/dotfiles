@@ -6,5 +6,5 @@ Copying dotfiles to this backup folder: `./update.sh backup`
 
 Restore dotfiles from this folder `./update.sh restore`
 
-Time in UTC.
+Time in UTC+8.
 
