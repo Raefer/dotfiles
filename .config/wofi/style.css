@@ -1,0 +1,39 @@
+window {
+    border-radius: 10px;
+    margin: 5px;
+    border: 2px solid gray;
+    background-color: gray;
+}
+
+#input {
+    border-radius: 10px;
+    margin: 10px;
+    border: 2px solid gray;
+    background-color: gray;
+}
+
+#inner-box {
+    border-radius: 10px;
+    margin: 5px;
+    border: 2px solid gray;
+    background-color: gray;
+}
+
+#outer-box {
+    border-radius: 10px;
+    margin: 5px;
+    border: 2px solid #393939;
+    background-color: #393939;
+}
+
+#scroll {
+    border-radius: 10px;
+    margin: 5px;
+    border: 2px solid #393939;
+    background-color: #393939;
+}
+
+#entry:selected {
+    border-radius: 10px
+}
+
