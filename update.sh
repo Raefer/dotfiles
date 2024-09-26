@@ -2,13 +2,13 @@
 
 DIR_PATH=".config/"
 CONFIG_DIR=(
-    "tmux"
-    "nvim"
     "alacritty"
+    "feh"
+    "nvim"
+    "sway"
+    "tmux"
     "waybar"
     "wofi"
-    "sway"
-    "feh"
 )
 
 CONFIG_FILE=(
@@ -18,7 +18,7 @@ CONFIG_FILE=(
 mkdir .config
 
 case "$1" in
-    backup) 
+    "backup") 
         for DIR in ${CONFIG_DIR[@]}; do 
             LOC=$DIR_PATH$DIR
 
@@ -39,7 +39,7 @@ case "$1" in
             cp -r ~/$FILE ./$FILE
         done
         ;;
-    restore)
+    "restore_confirmed")
         for DIR in ${CONFIG_DIR[@]}; do 
             LOC=$DIR_PATH$DIR
 

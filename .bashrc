@@ -8,7 +8,7 @@ fi
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+	PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 export PATH
 
@@ -28,5 +28,21 @@ unset rc
 
 . "$HOME/.cargo/env"
 
-alias ls=exa
+
+## CUSTOM
+
+cat ~/concurrent-tasks
+
+# shorthand
+alias q=exit
 alias pm=pulsemixer
+
+# unix tool behavior
+alias mkdir="mkdir -p -v"
+
+# unix tool replacement
+if [ -f $HOME/.cargo/bin/exa ]; then
+	alias ls=exa
+fi
+
+

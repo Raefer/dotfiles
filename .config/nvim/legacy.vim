@@ -1,10 +1,10 @@
 " vim-pencil
 function! Prose()
   call pencil#init()
-  " call lexical#init()
-  " call litecorrect#init()
-  " call textobj#quote#init()
-  " call textobj#sentence#init()
+  call lexical#init()
+  call litecorrect#init()
+  call textobj#quote#init()
+  call textobj#sentence#init()
 
   " manual reformatting shortcuts
   nnoremap <buffer> <silent> Q gqap
@@ -40,3 +40,6 @@ endfunction
 
 " invoke manually by command for other file types
 command! -nargs=0 Prose call Prose()
+
+" set textwidth
+let g:pencil#textwidth=80

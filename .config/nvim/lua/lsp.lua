@@ -23,11 +23,15 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 end
 
-
 -- Autoinstall language servers
 require("mason-lspconfig").setup {
-  ensure_installed = { 'lua_ls', 'rust_analyzer',
-    --  'bashls', 'tsserver', 'html', 'clangd',
+  ensure_installed = {
+    'lua_ls',
+    'rust_analyzer',
+    -- 'html',
+    'bashls',
+    -- 'ts_ls',
+    -- 'clangd',
   }
 }
 
@@ -69,12 +73,14 @@ lspconfig['rust_analyzer'].setup {
   }
 }
 
--- lspconfig['bashls'].setup {
---   capabilities = capabilities,
---   on_attach = on_attach,
--- }
---
--- lspconfig['tsserver'].setup {
+-- Setting up bashls requires bash-language-server in npm
+-- $ npm install -g bash-language-server
+lspconfig['bashls'].setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+-- lspconfig['ts_ls'].setup {
 --   capabilities = capabilities,
 --   on_attach = on_attach,
 --   filetypes = {
@@ -83,7 +89,7 @@ lspconfig['rust_analyzer'].setup {
 --     "vue",
 --   },
 -- }
---
+
 -- local html_capability = vim.lsp.protocol.make_client_capabilities()
 -- html_capability.textDocument.completion.completionItem.snippetSupport = true
 -- lspconfig['html'].setup {
