@@ -13,6 +13,7 @@ CONFIG_DIR=(
 
 CONFIG_FILE=(
     ".bashrc"
+    ".config/user-dirs.dirs"
 )
 
 mkdir .config
