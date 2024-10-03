@@ -6,8 +6,7 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # User specific environment
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
-then
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 export PATH
@@ -28,12 +27,10 @@ unset rc
 
 . "$HOME/.cargo/env"
 
-
 ## CUSTOM
 
 # add ~/script/ to $PATH
-if ! [[ "$PATH" =~ "$HOME/script:" ]]
-then
+if ! [[ "$PATH" =~ "$HOME/script:" ]]; then
     PATH="$HOME/script:$PATH"
 fi
 export PATH
@@ -47,9 +44,11 @@ alias ....="cd ../../.."
 alias ...="cd ../.."
 alias ..="cd .."
 alias stg="cd /stg/"
+alias ~="cd ~"
 
 # Typo
 alias dc=cd
+alias nivm=nvim
 alias sl=ls
 
 # unix tool behavior
@@ -67,4 +66,3 @@ fi
 if [ -f $HOME/.cargo/bin/bat ]; then
     alias cat=bat
 fi
-

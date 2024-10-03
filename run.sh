@@ -1,52 +1,65 @@
 #!/bin/sh
 
-target_item=(
-    # Folders
-    ".config/feh"
-    ".config/sway"
-    ".config/waybar"
-    ".config/wofi"
-    ## Reconfigured
-    ".config/alacritty"
-    ".config/nvim"
-    ".config/tmux"
-
-    # Files
-    ".bashrc"
+# /
+root_item=(
+    "etc/xdg/reflector/reflector.conf"
 )
 
-target_firefox=(
+# /home/username/
+home_item=(
+    # Folders
+    ".config/alacritty"
+    ".config/feh" # reconfiguration pending
+    ".config/nvim"
+    ".config/sway"
+    ".config/tmux"
+    ".config/waybar" # reconfiguration pending
+    ".config/wofi" # reconfiguration pending
+    # Files
+    ".bashrc"
+    # Inactive
+)
+
+# /home/username/.mozilla/firefox/xxxxxxxx.default-release/
+firefox_item=( 
     "bookmarkbackups"
     "prefs.js"
 )
 
 # Get absolute path to this directory
-script_loc=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-bak_home=$script_loc/home
+script_location=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-# Mark backup directory
-bak_config=$bak_home/.config
-bak_firefox=$bak_home/.mozilla/firefox/xxxxxxxx.default-release
+root=$script_location/root
+home=$root/home/xxxxxxxx
+fire=$home/.mozilla/firefox/xxxxxxxx.default-release
 
-mkdir -p $bak_home $bak_config $bak_firefox
+conf=$home/.config
 
 # Backing up
 if [ "$1" == "bak" ]; then
     # Clean up 
     echo " Clean up and reset the backup folder."
-    rm -r $bak_config/*
-    rm -r $bak_firefox/*
+    rm -r -v $root
+
+    # Mark backup directory
+    mkdir -p -v $root $home $fire $conf
+
+    # Backup etc files
+    echo " Backing up etc."
+    for item in ${root_item[@]}; do
+        cp -r -v /$item $root/$item
+    done
 
     # Backup items
     echo " Backing up dotfiles."
-    for item in ${target_item[@]}; do
-        cp -r $HOME/$item $bak_home/$item
+    for item in ${home_item[@]}; do
+        cp -r -v $HOME/$item $home/$item
     done
 
     # Backup firefox
     echo " Backing up firefox."
-    for item in ${target_firefox[@]}; do
-        cp -r $HOME/.mozilla/firefox/*.default-release/$item $bak_firefox/$item
+    for item in ${firefox_item[@]}; do
+        cp -r -v $HOME/.mozilla/firefox/*.default-release/$item $fire/$item
     done
 
     echo " Done."
