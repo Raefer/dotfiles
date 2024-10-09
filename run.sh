@@ -9,12 +9,12 @@ root_item=(
 home_item=(
     # Folders
     ".config/alacritty"
-    ".config/feh" # reconfiguration pending
+    ".config/feh"
     ".config/nvim"
     ".config/sway"
     ".config/tmux"
-    ".config/waybar" # reconfiguration pending
-    ".config/wofi" # reconfiguration pending
+    ".config/waybar"
+    ".config/wofi"
     # Files
     ".bashrc"
     # Inactive
@@ -26,42 +26,36 @@ firefox_item=(
     "prefs.js"
 )
 
-# Get absolute path to this directory
-script_location=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-root=$script_location/root
-home=$root/home/xxxxxxxx
-fire=$home/.mozilla/firefox/xxxxxxxx.default-release
+home_dir=$script_dir/home
+fire_dir=$script_dir/home/mozilla/firefox/xxxxxxxx.default-release
+root_dir=$script_dir/root
 
-conf=$home/.config
-
-# Backing up
 if [ "$1" == "bak" ]; then
-    # Clean up 
-    echo " Clean up and reset the backup folder."
-    rm -r -v $root
+    # clean up
+    echo " Cleaning up backup directories."
+    rm -r $home_dir/ $root_dir/
 
-    # Mark backup directory
-    mkdir -p -v $root $home $fire $conf
+    # mark directory
+    echo " Making backup directories."
+    mkdir -p $fire_dir $root_dir $home_dir/.config
+    mkdir -p $root_dir/etc/xdg/reflector
 
-    # Backup etc files
-    echo " Backing up etc."
-    for item in ${root_item[@]}; do
-        cp -r -v /$item $root/$item
-    done
-
-    # Backup items
+    # backup
     echo " Backing up dotfiles."
     for item in ${home_item[@]}; do
-        cp -r -v $HOME/$item $home/$item
+        cp -r $HOME/$item $home_dir/$item
     done
 
-    # Backup firefox
-    echo " Backing up firefox."
+    echo " Backing up firefox config files."
     for item in ${firefox_item[@]}; do
-        cp -r -v $HOME/.mozilla/firefox/*.default-release/$item $fire/$item
+        cp -r $HOME/.mozilla/firefox/*.default-release/$item $fire_dir/$item
     done
 
-    echo " Done."
+    echo " Backing up config files from root."
+    for item in ${root_item[@]}; do
+        cp -r /$item $root_dir/$item
+    done
 fi
 
