@@ -90,14 +90,16 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local plugins = require("plugins")
+local plugin_list = require("plugin-list")
 
 -- Setup
 require("lazy").setup({
-	spec = { plugins },
+	spec = { plugin_list },
 	install = { missing = true },
 	-- checker = { enabled = true }, -- check updates for plugins
 })
+
+require("plugin")
 
 -- Theme
 -- require("theme.nightfox")

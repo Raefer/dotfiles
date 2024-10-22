@@ -25,9 +25,8 @@ return {
 		},
 	},
 
-	{ -- plugin.Nvim-tree
-		"nvim-tree/nvim-tree.lua",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+	{
+		"dhruvasagar/vim-table-mode",
 	},
 
 	{
@@ -54,6 +53,11 @@ return {
 				{ "<leader>g", group = " Go to" },
 			},
 		},
+	},
+
+	{ -- plugin.Nvim-tree
+		"nvim-tree/nvim-tree.lua",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 
 	{ -- plugin.Mason-lspconfig

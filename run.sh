@@ -29,7 +29,7 @@ firefox_item=(
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 home_dir=$script_dir/home
-fire_dir=$script_dir/home/mozilla/firefox/xxxxxxxx.default-release
+fire_dir=$script_dir/home/.mozilla/firefox/xxxxxxxx.default-release
 root_dir=$script_dir/root
 
 if [ "$1" == "bak" ]; then
