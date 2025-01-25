@@ -9,7 +9,7 @@ end
 Map("<leader>e", name, "Open [F]ile explorer", function()
 	api.tree.focus()
 end)
-Map("<C-s>", name, "[S]ave", ":w<CR>")
+Map("<C-s>", name, "[S]ave", "<cmd>w<CR>")
 
 require("nvim-tree").setup({
 	on_attach = on_attach,
