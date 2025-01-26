@@ -1,13 +1,8 @@
 #!/bin/sh
 
-# /
-root_item=(
-    "etc/xdg/reflector/reflector.conf"
-)
-
 # /home/username/
-home_item=(
-    # Folders
+config_item=(
+    # Directories
     ".config/alacritty"
     ".config/feh"
     ".config/nvim"
@@ -17,45 +12,38 @@ home_item=(
     ".config/wofi"
     # Files
     ".bashrc"
-    # Inactive
-)
-
-# /home/username/.mozilla/firefox/xxxxxxxx.default-release/
-firefox_item=( 
-    "bookmarkbackups"
-    "prefs.js"
 )
 
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 home_dir=$script_dir/home
-fire_dir=$script_dir/home/.mozilla/firefox/xxxxxxxx.default-release
-root_dir=$script_dir/root
 
-if [ "$1" == "bak" ]; then
+if [ "$1" == "backup" ]; then
     # clean up
     echo " Cleaning up backup directories."
-    rm -r $home_dir/ $root_dir/
+    rm -rf $home_dir/
 
     # mark directory
     echo " Making backup directories."
-    mkdir -p $fire_dir $root_dir $home_dir/.config
-    mkdir -p $root_dir/etc/xdg/reflector
+    mkdir -p $home_dir/.config
 
     # backup
     echo " Backing up dotfiles."
-    for item in ${home_item[@]}; do
+    for item in ${config_item[@]}; do
         cp -r $HOME/$item $home_dir/$item
     done
 
-    echo " Backing up firefox config files."
-    for item in ${firefox_item[@]}; do
-        cp -r $HOME/.mozilla/firefox/*.default-release/$item $fire_dir/$item
+elif [ "$1" == "restore" ]; then
+    # clean up
+    echo " Cleaning up dotfiles in the home directory."
+    for item in ${config_item[@]}; do
+        rm -rf $HOME/$item
     done
-
-    echo " Backing up config files from root."
-    for item in ${root_item[@]}; do
-        cp -r /$item $root_dir/$item
+    
+    # restore
+    echo " Restoring dotfiles."
+    for item in ${config_item[@]}; do
+        cp -r $home_dir/$item $HOME/.config
     done
+    mv $HOME/.config/.bashrc $HOME
 fi
-

@@ -2,7 +2,7 @@ font pango:JetBrainsMono Nerd Font 11
 title_align center
 
 default_border pixel 2
-default_floating_border normal
+default_floating_border pixel 2
 
 set $Fg #BFBFBF
 
@@ -24,14 +24,6 @@ client.background       #E6E6E6
 gaps inner 10px
 gaps outer 5px
 
-# per program condition
-for_window [app_id="feh"] floating enable
-for_window [app_id="feh"] border pixel 5
-
-assign [app_id="feh"] 1
-
-for_window [app_id="telegram"] floating enable
-
 ################################################################################
 
 ### autoexec
@@ -47,22 +39,54 @@ set $D j
 set $U k
 set $R l
 
-set $Term alacritty
-set $Menu wofi --show drun
-set $Browser firefox
+set $Term "alacritty"
+set $Browser "firefox"
+set $App "spotify-launcher & telegram-desktop"
+set $Menu "wofi --show drun"
+
+set $SSA "screenshot.sh all"
+set $SSL "screenshot.sh left"
+set $SSC "screenshot.sh center"
+set $SSR "screenshot.sh right"
 
 ### output configuration
-output HDMI-A-1 resolution 2560x1440 position 0,0
-output DP-2 resolution 2560x1440 position -2560,0
-output DP-1 resolution 1920x1080 position 2560,360
+# output HDMI-A-1 resolution 2560x1440 position 0,0
+output DP-1 resolution 2560x1440 position 0,0
+output DP-2 resolution 2560x1440 position 2560,0
 
 # default workspaces per monitor
-workspace 1 output HDMI-A-1
+# workspace name will be handled by waybar
+workspace 1 output DP-1
 workspace 2 output DP-2
-workspace 3 output DP-1
+# workspace number 1 output HDMI-A-1
+# workspace number 2 output DP-1
+# workspace number 3 output DP-1
+# workspace number 4 output HDMI-A-1
 
 # focus on the main monitor
-focus output HDMI-A-1
+# focus output HDMI-A-1
+focus output DP-1
+
+################################################################################
+
+# per program condition
+for_window [class="feh"] floating enable
+assign [class="feh"] number 1
+
+assign [class="vlc"] number 2
+
+# assign [class="Spotify"] number 3
+
+# assign [app_id="org.telegram.desktop"] number 3
+
+for_window [app_id="qalculate-gtk"] floating enable
+
+# Specialized programs
+# assign [app_id="org.kde.digikam"] number 4
+
+# assign [class="Darktable"] number 4
+
+################################################################################
 
 ### key bindings
 #
@@ -72,6 +96,8 @@ focus output HDMI-A-1
     bindsym $Mod+return exec $Term
     # browser
     bindsym $Mod+backspace exec $Browser
+    # misc apps
+    # bindsym $Mod+t exec $App
     # launcher
     bindsym $Mod+d exec $Menu
     # fullscreen
@@ -111,15 +137,15 @@ focus output HDMI-A-1
     bindsym $Mod+9 workspace number 9
 
     # move focused container to workspace
-    bindsym $Mod+shift+1 move container to workspace number 1
-    bindsym $Mod+shift+2 move container to workspace number 2
-    bindsym $Mod+shift+3 move container to workspace number 3
-    bindsym $Mod+shift+4 move container to workspace number 4
-    bindsym $Mod+shift+5 move container to workspace number 5
-    bindsym $Mod+shift+6 move container to workspace number 6
-    bindsym $Mod+shift+7 move container to workspace number 7
-    bindsym $Mod+shift+8 move container to workspace number 8
-    bindsym $Mod+shift+9 move container to workspace number 9
+    bindsym $Mod+ctrl+1 move container to workspace number 1
+    bindsym $Mod+ctrl+2 move container to workspace number 2
+    bindsym $Mod+ctrl+3 move container to workspace number 3
+    bindsym $Mod+ctrl+4 move container to workspace number 4
+    bindsym $Mod+ctrl+5 move container to workspace number 5
+    bindsym $Mod+ctrl+6 move container to workspace number 6
+    bindsym $Mod+ctrl+7 move container to workspace number 7
+    bindsym $Mod+ctrl+8 move container to workspace number 8
+    bindsym $Mod+ctrl+9 move container to workspace number 9
 #
 # window manager:
 #
@@ -147,6 +173,13 @@ focus output HDMI-A-1
 
     # MOD+LMB to move, MOD+RMB to resize
     floating_modifier $Mod normal
+#
+# screrenshots
+#
+    bindsym $Mod+u exec $SSA
+    bindsym $Mod+i exec $SSL
+    bindsym $Mod+o exec $SSC
+    bindsym $Mod+p exec $SSR
 #
 
 include /etc/sway/config.d/*

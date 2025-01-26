@@ -55,21 +55,21 @@ return {
 		},
 	},
 
-	{ -- plugin.Nvim-tree
+	{ -- plugin.nvim-tree
 		"nvim-tree/nvim-tree.lua",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 
-	{ -- plugin.Mason-lspconfig
-		"williamboman/mason-lspconfig.nvim",
-		dependencies = {
-			"williamboman/mason.nvim",
-			"neovim/nvim-lspconfig",
-			{ "j-hui/fidget.nvim", opts = {} },
-		},
-	},
+	-- { -- plugin.mason-lspconfig
+	-- 	"williamboman/mason-lspconfig.nvim",
+	-- 	dependencies = {
+	-- 		"williamboman/mason.nvim",
+	-- 		"neovim/nvim-lspconfig",
+	-- 		{ "j-hui/fidget.nvim", opts = {} },
+	-- 	},
+	-- },
 
-	{ -- plugin.Telescope
+	{ -- plugin.telescope
 		"nvim-telescope/telescope.nvim",
 		branch = "0.1.x",
 		dependencies = {
@@ -79,7 +79,7 @@ return {
 		},
 	},
 
-	{ -- plugin.Nvim-cmp
+	{ -- plugin.nvim-cmp
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			"neovim/nvim-lspconfig",
@@ -96,36 +96,57 @@ return {
 		},
 	},
 
-	{ -- plugin.Treesitter
+	{ -- plugin.treesitter
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 	},
 
-	{ -- plugin.Conform
+	{ -- plugin.conform
 		"stevearc/conform.nvim",
 	},
 
-	{ -- plugin.Neorg
+	{ -- plugin.neorg
 		"nvim-neorg/neorg",
 		lazy = false,
 		version = "*",
 	},
 
-	{ -- plugin.Todo-comments
+	{ -- plugin.todo-comments
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 
-	{ -- plugin.Nvim-highlight-colors
+	{
 		"brenoprata10/nvim-highlight-colors",
+        opts = {
+            ---@usage 'background'|'foreground'|'virtual'
+            render = "background",
+
+            ---@usage 'inline'|'eol'|'eow'
+            virtual_symbol_position = "inline",
+            virtual_symbol = "■",
+            virtual_symbol_prefix = "",
+            virtual_symbol_suffix = "",
+
+            enable_hex = true,           -- hex colors, e.g. '#FF8C00'
+            enable_short_hex = false,    -- short hex colors e.g. '#fff'
+            enable_rgb = true,           -- rgb colors, e.g. 'rgb(0 0 0)'
+            enable_hsl = true,           -- hsl colors, e.g. 'hsl(150deg 30% 40%)'
+            enable_var_usage = true,     -- CSS variables, e.g. 'var(--testing-color)'
+            enable_named_colors = false, -- named colors, e.g. 'green'
+            enable_tailwind = false,     -- tailwind colors, e.g. 'bg-blue-500'
+
+            exclude_filetypes = {},
+            exclude_buftypes = {},
+        },
 	},
 
-	{ -- theme.Nightfox
+	{ -- theme.nightfox
 		"EdenEast/nightfox.nvim",
 		priority = 1000,
 	},
 
-	{ -- theme.Onedark
+	{ -- theme.onedark
 		"navarasu/onedark.nvim",
 		priority = 1000,
 	},

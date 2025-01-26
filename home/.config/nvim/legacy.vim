@@ -7,3 +7,6 @@ endfor
 " Clear some annoying default mapping
 map <C-z> <Nop>
 map q <Nop>
+
+" Disable folding
+set nofoldenable

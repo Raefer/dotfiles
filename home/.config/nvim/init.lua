@@ -6,6 +6,9 @@ vim.g.maplocalleader = " "
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- Disable Fold
+--vim.opt.nofoldenable = true
+
 -- Nerd Font
 vim.g.have_nerd_font = true
 

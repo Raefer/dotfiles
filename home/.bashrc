@@ -28,7 +28,6 @@ unset rc
 . "$HOME/.cargo/env"
 
 # fctix5
-
 GTK_IM_MODULE=fcitx
 QT_IM_MODULE=fcitx
 XMODIFIERS=@im=fcitx
@@ -36,27 +35,18 @@ XMODIFIERS=@im=fcitx
 ## CUSTOM
 
 # add ~/script/ to $PATH
-if ! [[ "$PATH" =~ "$HOME/script:" ]]; then
-    PATH="$HOME/script:$PATH"
+if ! [[ "$PATH" =~ "$HOME/script/sway:$HOME/script" ]]; then
+    PATH="$HOME/script/sway:$HOME/script:$PATH"
 fi
 export PATH
 
 # shorthand
-alias pm=pulsemixer
-alias q=exit
+alias pm="pulsemixer"
+alias q="exit"
+alias sdn="shutdown now"
 
-# Navigation shorthand
-alias ....="cd ../../.."
-alias ...="cd ../.."
-alias ..="cd .."
+# navigation shorthand
 alias dotfiles="cd  ~/downloads/git/dotfiles/"
-alias stg="cd /stg/"
-alias ~="cd ~"
-
-# Typo
-alias dc=cd
-alias nivm=nvim
-alias sl=ls
 
 # unix tool behavior
 alias grep="grep --color=always"
@@ -72,4 +62,19 @@ fi
 
 if [ -f $HOME/.cargo/bin/bat ]; then
     alias cat="bat --style=plain --paging=never"
+fi
+
+if [ -f $HOME/.cargo/bin/dust ]; then
+    alias du="dust"
+fi
+
+# DELETING SHIT
+
+# why capitalize? just... why?
+if [ -d $HOME/Downloads ]; then
+    rmdir Downloads
+fi
+
+if [ -f $HOME/.local/share/recently-used.xbel ]; then
+    rm $HOME/.local/share/recently-used.xbel
 fi

@@ -7,6 +7,7 @@ require("conform").setup({
 		json = { "jq" },
 		lua = { "stylua" },
 		python = { "ruff" },
+		rust = { "rustfmt" }, -- installed via rustup
 	},
 	format_on_save = function(bufnr)
 		-- local disable_filetypes = { c = true, cpp = true }
