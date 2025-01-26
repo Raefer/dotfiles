@@ -11,26 +11,40 @@ config_item=(
     ".config/waybar"
     ".config/wofi"
     # Files
-    ".bashrc"
+    # ".bashrc"
+)
+
+firefox_item=(
+    ".mozilla/firefox/*.default-release/places.sqlite"
+    ".mozilla/firefox/*.default-release/prefs.js"
 )
 
 script_dir=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+bak_root=$script_dir/home
 
-home_dir=$script_dir/home
+config_bak_loc=$bak_root/.config
+firefox_bak_loc=$bak_root/.mozilla/firefox/xxxxxxxx.default-release
 
 if [ "$1" == "backup" ]; then
     # clean up
     echo " Cleaning up backup directories."
-    rm -rf $home_dir/
+    rm -rf $bak_root/
 
-    # mark directory
+    # mark directories
     echo " Making backup directories."
-    mkdir -p $home_dir/.config
+    mkdir -p $config_bak_loc
+    mkdir -p $firefox_bak_loc
 
-    # backup
+    # backup dotfiels
     echo " Backing up dotfiles."
     for item in ${config_item[@]}; do
-        cp -r $HOME/$item $home_dir/$item
+        cp -r $HOME/$item $config_bak_loc/
+    done
+
+    # backup firefox
+    echo " Backing up firefox."
+    for item in ${firefox_item[@]}; do
+        cp -r $HOME/$item $firefox_bak_loc/
     done
 
 elif [ "$1" == "restore" ]; then
@@ -40,10 +54,14 @@ elif [ "$1" == "restore" ]; then
         rm -rf $HOME/$item
     done
     
-    # restore
+    # restore dotfiles
     echo " Restoring dotfiles."
     for item in ${config_item[@]}; do
-        cp -r $home_dir/$item $HOME/.config
+        cp -r $bak_root/$item $HOME/$item
     done
-    mv $HOME/.config/.bashrc $HOME
+    
+    echo " Restoring firefox."
+    for item in ${firefox_item[@]}; do
+        cp -r $bak_root/$item $HOME/$item
+    done
 fi

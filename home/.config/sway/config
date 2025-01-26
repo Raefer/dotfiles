@@ -44,6 +44,7 @@ set $Browser "firefox"
 set $App "spotify-launcher & telegram-desktop"
 set $Menu "wofi --show drun"
 
+# requires screenshot.sh
 set $SSA "screenshot.sh all"
 set $SSL "screenshot.sh left"
 set $SSC "screenshot.sh center"
